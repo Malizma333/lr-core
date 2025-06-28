@@ -34,7 +34,7 @@ $(TEST)/%.tap: $(BUILD)/%.spec.js $(BUILD)/%.js
 	@printf "Test: $< > $@"
 	@mkdir -p $(@D)
 	@$(TEST_CMD) $< > $@ 2>> $@ && ([ $$? -eq 0 ] && printf " PASSED\n") || (printf " FAILED\n" && cat $@)
-$(TEST)/%.tap: $(BUILD)/%.spec.js $(BUILD)/%/*.js $(BUILD)/%/**/*.js
+$(TEST)/%.tap: $(BUILD)/%.spec.js $(wildcard $(BUILD)/%/*.js) $(wildcard $(BUILD)/%/**/*.js)
 	@printf "Test: $< > $@"
 	@mkdir -p $(@D)
 	@$(TEST_CMD) $< > $@ 2>> $@ && ([ $$? -eq 0 ] && printf " PASSED\n") || (printf " FAILED\n" && cat $@)
